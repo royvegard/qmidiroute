@@ -1,0 +1,58 @@
+QT_BASE_DIR=/usr/lib/qt3
+QT_LIB_DIR=$(QT_BASE_DIR)/lib
+QT_BIN_DIR=$(QT_BASE_DIR)/bin
+QT_INCLUDE_DIR=$(QT_BASE_DIR)/include
+X11_LIB_DIR=/usr/X11R6/lib
+X11_INCLUDE_DIR=/usr/X11R6/include
+
+qmidiroute: gui.o gui.moc.o \
+	mapwidget.o mapwidget.moc.o \
+	midimap.o midimap.moc.o \
+	mapdata.o mapdata.moc.o \
+	seqdriver.o seqdriver.moc.o \
+	logwidget.o logwidget.moc.o \
+	passwidget.o passwidget.moc.o \
+	main.o
+	gcc -g -o qmidiroute \
+	gui.o gui.moc.o \
+	mapwidget.o mapwidget.moc.o \
+	midimap.o midimap.moc.o \
+	mapdata.o mapdata.moc.o \
+	seqdriver.o seqdriver.moc.o \
+	logwidget.o logwidget.moc.o \
+	passwidget.o passwidget.moc.o \
+	main.o \
+	-L$(QT_LIB_DIR) -L$(X11_LIB_DIR) \
+	-lqt-mt -lasound
+
+CXXFLAGS=-I$(QT_INCLUDE_DIR) -I$(X11_INCLUDE_DIR) -I. -O2 -g -Wall
+
+gui.o: gui.cpp gui.h mapdata.h mapwidget.h logwidget.h passwidget.h
+gui.moc.o: gui.moc.cpp gui.h mapdata.h mapwidget.h logwidget.h passwidget.h
+gui.moc.cpp: gui.h gui.cpp
+	$(QT_BIN_DIR)/moc gui.h -o gui.moc.cpp
+mapwidget.o: mapwidget.cpp mapwidget.h midimap.h
+mapwidget.moc.o: mapwidget.moc.cpp mapwidget.h midimap.h
+mapwidget.moc.cpp: mapwidget.h mapwidget.cpp
+	$(QT_BIN_DIR)/moc mapwidget.h -o mapwidget.moc.cpp
+midimap.o: midimap.cpp midimap.h
+midimap.moc.o: midimap.moc.cpp midimap.h
+midimap.moc.cpp: midimap.h midimap.cpp
+	$(QT_BIN_DIR)/moc midimap.h -o midimap.moc.cpp
+mapdata.o: mapdata.cpp mapdata.h seqdriver.h
+mapdata.moc.o: mapdata.moc.cpp mapdata.h seqdriver.h
+mapdata.moc.cpp: mapdata.h mapdata.cpp
+	$(QT_BIN_DIR)/moc mapdata.h -o mapdata.moc.cpp
+seqdriver.o: seqdriver.cpp seqdriver.h midimap.h main.h
+seqdriver.moc.o: seqdriver.moc.cpp seqdriver.h midimap.h main.h
+seqdriver.moc.cpp: seqdriver.h seqdriver.cpp
+	$(QT_BIN_DIR)/moc seqdriver.h -o seqdriver.moc.cpp
+logwidget.o: logwidget.cpp logwidget.h
+logwidget.moc.o: logwidget.moc.cpp logwidget.h
+logwidget.moc.cpp: logwidget.h logwidget.cpp
+	$(QT_BIN_DIR)/moc logwidget.h -o logwidget.moc.cpp
+passwidget.o: passwidget.cpp passwidget.h
+passwidget.moc.o: passwidget.moc.cpp passwidget.h
+passwidget.moc.cpp: passwidget.h passwidget.cpp
+	$(QT_BIN_DIR)/moc passwidget.h -o passwidget.moc.cpp
+main.o: main.cpp gui.h main.h

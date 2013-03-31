@@ -1,0 +1,145 @@
+.\" 
+.\" Manual page for qmidiroute
+.\" Process with:
+.\"   groff -man -Tascii qmidiroute.1 | less
+.\"
+.\" Get a printable version with:
+.\"   groff -t -e -mandoc -Tps qmidiroute.1 > qmidiroute.ps
+.\"
+.TH QMIDIROUTE 1 2009-09-13
+.SH NOM
+qmidiroute \- un processeur et routeur d'évênements MIDI
+
+.SH SYNOPSIS
+.br
+.B qmidiroute 
+[\fIOPTION\fR] [\fIfichier\fR]
+.br 
+.B qmidiroute 
+{
+.B \-\-help 
+| 
+.B \-\-version
+}
+
+.SH DESCRIPTION
+.B qmidiroute
+est un processeur d'évênements MIDI versatile pour le séquenceur ALSA.
+Son interface graphique est basée sur la bibliothèque Qt4.
+.B qmidiroute
+permet le montage d'un nombre illimité de routages MIDI dans lesquels
+les évênements entrants sont d'abord filtrés, puis modifiés en valeur
+ou même en type d'évênement, et enfin acheminés vers un port ALSA de 
+sortie dédié. Les routes fonctionnent en parallèle et sont organisées
+en onglets. Avec 
+.B qmidiroute
+il est par exemple possible de changer ou invertir l'échelle d'un 
+clavier, de transformer des notes jouées sur le clavier en changements
+de son (program change) ou des données d'un contrôleur en notes.
+.B qmidiroute
+possède également un outil de journalisation des évênements MIDI reçus.
+.SS "Utilisation Générale"
+Après le lancement de l'application, l'onglet 
+.I Non-traité
+est présenté (cf paragraphe plus bas). Pour commencer le montage des
+routes MIDI, on clique le bouton
+.I Nouvelle route...,
+ce qui produit une nouvelle route MIDI visible comme onglet dans la zone
+de routage. Plusieurs routes travaillant en parallèle peuvent ainsi être
+créées et organisées en utilisant les boutons
+.I Renommer, Supprimer 
+et
+.I Dupliquer. 
+L'intégralité du montage peut être enregistré dans et chargé à partir 
+d'un fichier QMidiRoute (.qmr). 
+Le 
+.I Journal 
+d'évênements est affiché dans la partie inférieure de l'interface et 
+peut être caché ou détaché au choix. La journalisation peut également
+être désactivée totalement ou pour les évênements MIDI Clock uniquement.
+.SS "Monter une route MIDI"
+.SS "Le champ Entrée"
+Le champ
+.I Entrée
+représente le filtre pour les évênements entrants dans chaque route.
+Les évênements traités sont 
+.I Note, Contrôleur, Pitchbend
+et
+.I Program Change. 
+Ces évênements peuvent être filtrés par rapport à leurs valeurs 
+respectives ou par leur canal MIDI. Les évênements pouvant passer ce 
+filtre d'entrée sont dirigés vers le champ 
+.I Sortie.
+
+.SS "Le champ Sortie"
+Le champ
+.I Sortie
+permet de spécifier en quel type d'évênement les données passant 
+par le filtre d'entrée seront transformées, de quelle manière leur canal 
+MIDI et leurs valeurs seront changées, et enfin vers quel port AlSA
+elles seront acheminées. Le
+.I Canal
+et les
+.I Valeurs
+peuvent être définis en mode 
+.I Fixe, Offset 
+ou
+.I Reverse Offset
+par rapport à l'évênement d'entrée. Par exemple, 
+.I Reverse Offset
+prend la valeur spécifiée et en soustrait la valeur de l'évênement 
+d'entrée pour produire la valeur de l'évênement sortant. Si la gamme de
+valeurs spécifiée à la sortie est différente de celle de l'entrée, la 
+gamme des valeurs d'entrée sera mise à l'échelle de la gamme de sortie,
+et ceci de manière continue. Les évênements seront acheminés vers le 
+.I port ALSA 
+spécifié. Le nombre de ports ALSA disponibles peut être défini 
+en spécifiant l' 
+.B option
+correspondante.
+
+.SS "L'onglet Non-traité"
+Dans l'onglet
+.I Non-traité,
+on gère les évênements ne passant par aucun des filtres définis dans
+l'ensemble du routage. Ces évênements peuvent être rejetés ou transmis 
+au port spécifié.
+ 
+.SH OPTIONS
+.B \-\-portCount <num>
+Définir le nombre de ports ALSA disponibles égal à <num>. La valeur 
+par défaut est 2.
+.TP
+.B \-\-help                      
+Affiche les options de ligne de commande disponibles et quitte le 
+programme.
+.TP
+.B \-\-version                   
+Affiche l'information de version du programme et quitte celui-ci.
+.TP
+.B fichier
+Nom d'un fichier QMidiRoute (.qmr) valide à charger au démarrage du 
+programme.
+.SH FICHIERS
+.I *.qmr
+.RS
+Fichiers QMidiRoute contenant les données de routage MIDI au format
+plein texte.
+
+.SH EXEMPLES
+Un fichier d'exemple de routage MIDI se situe dans  
+.I /usr/share/qmidiroute 
+ou dans
+.I /usr/local/share/qmidiroute
+
+.SH NOTES
+Les erreurs et avertissements sont écrits dans 
+.BR stderr (3).
+.PP
+.SH SUPPORT
+alsamodular-devel@lists.sourceforge.net
+
+.SH AUTEURS
+Matthias Nagorni, Frank Kober et Guido Scholz. Cette page de manuel 
+a été écrite par
+Frank Kober <emuse@users.sourceforge.net>.

@@ -1,0 +1,134 @@
+.\" 
+.\" Manual page for qmidiroute
+.\" Process with:
+.\"   groff -man -Tascii qmidiroute.1 | less
+.\"
+.\" Get a printable version with:
+.\"   groff -t -e -mandoc -Tps qmidiroute.1 > qmidiroute.ps
+.\"
+.TH QMIDIROUTE 1 2009-09-13
+.SH NAME
+qmidiroute \- MIDI event processor and router
+
+.SH SYNOPSIS
+.br
+.B qmidiroute 
+[\fIOPTION\fR] [\fIfile\fR]
+.br 
+.B qmidiroute 
+{
+.B \-\-help 
+| 
+.B \-\-version
+}
+
+.SH DESCRIPTION
+.B qmidiroute
+is a versatile MIDI event processor and router for the ALSA sequencer.
+The graphical interface is based on the Qt4 toolkit.
+.B qmidiroute
+permits setting up an unlimited number of MIDI maps in which incoming 
+events are selected, modified or even changed in type before being 
+directed to a dedicated ALSA output port. The maps work in parallel,
+and they are organized in tabs. With 
+.B qmidiroute
+it is for example possible to change or invert the scale of a keyboard, 
+to transform keyboard strokes into program changes or controller data 
+into notes.
+
+Incoming MIDI events can be logged in a list and are displayed
+in different colors according to their MIDI type.
+.B qmidiroute
+provides one ALSA input port and as default two ALSA output ports. The
+numerical ALSA client id is displayed as part of the window title.
+.SS "General Usage"
+After starting the application, the 
+.I Unmatched
+tab is presented (see below). To start MIDI routing setup, the 
+.I New map...
+button can be clicked, which will create a new MIDI map appearing as 
+a tab in the map area. The entire setup can be saved to and 
+loaded from a QMidiRoute file (.qmr). Several maps can be created to 
+work in parallel. The maps can be organized using the 
+.I Map Rename, Remove 
+and 
+.I Clone 
+buttons. The 
+.I Event Log 
+is displayed in the bottom area by default, but can be hidden if not
+needed or floated as a top-level window on the desktop. Logging 
+can also be disabled generally or for MIDI Clock events only. 
+.SS "MIDI Input"
+The 
+.I Input
+field represents the incoming event filter of each map. 
+Handled event types are 
+.I Note, Controller, Pitchbend
+and 
+.I Program Change. 
+The events can be filtered by their respective values or by MIDI 
+channel. Events matching the conditions specified in the 
+.I Input
+field are directed to the 
+.I Output 
+field.
+.SS "MIDI Output"
+The 
+.I Output
+field sets terms into which event type the matching
+events are transformed, how their channel and values are transformed, 
+and to which ALSA port they are directed. 
+.I Channels
+and 
+.I Values
+can be set 
+.I Fixed, Offset 
+or 
+.I Reverse Offset
+with respect to the input event. As an example, 
+.I Reverse Offset
+will take the value specified and 
+subtract the incoming event value from it to produce the output event
+value. If the output range for a value is different from its input 
+counterpart, the input range will be smoothly scaled to the output 
+range. Events will be sent to the ALSA port specified. The number of 
+available ALSA ports can be set using the corresponding command-line
+.B option.
+.SS "Unmatched MIDI events"
+In the 
+.I Unmatched
+tab, the handling of events not matching any input filter of the 
+defined maps is specified. These events can be discarded or sent to a 
+specified ALSA port.
+.SH OPTIONS
+.TP
+.BI \-\-portCount\  <num>
+Set the number of available ALSA output ports to <num>. The default
+is 2.
+.TP
+.BI \-\-help
+Print possible command-line options and exit.
+.TP
+.BI \-\-version
+Print version information and exit.
+.TP
+.B file
+Name of a valid QMidiRoute (.qmr) file to be loaded on start.
+.SH FILES
+.I *.qmr
+.RS
+QMidiRoute files containing MIDI routing data in plain text format.
+.SH EXAMPLES
+An example MIDI map file can be found in 
+.I /usr/share/qmidiroute 
+or in
+.I /usr/local/share/qmidiroute
+.SH NOTES
+Errors and warnings are written to 
+.BR stderr (3).
+.SH SUPPORT
+alsamodular-devel@lists.sourceforge.net
+.SH AUTHORS
+Matthias Nagorni, Frank Kober and Guido Scholz. This
+manual page was written by
+Frank Kober <emuse@users.sourceforge.net>.

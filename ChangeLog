@@ -1,0 +1,216 @@
+
++++ Release 0.3.1 (2011-xx-xx) +++
+
+2011-05-03  Frank Kober  <goemusic@yahoo.fr>
+	* qmidiroute.svg, qmidiroute.desktop: added
+	* Makefile.am: new files added to install items
+
+2011-04-24 Nikita Zlobin <cook60020tmp@mail.ru>
+	* mainwindow.cpp: Naming changed from "route" to "rule" when meaning
+	a single tab
+	* translations/qmidiroute_ru.ts: updated
+
+2011-04-23  Frank Kober  <goemusic@yahoo.fr>
+	* translations/qmidiroute_ru.ts, Makefile.am: Russian translation 
+	thankfully added, was provided by Nikita Zlobin.
+
+2010-07-14  Frank Kober  <goemusic@yahoo.fr>
+	* mapwidget.cpp: Fixed midimap update for IndexOutMode while qmr 
+	file is read (Fixes AMS Bug #3028929)
+
+2010-01-08 Guido Scholz <guido.scholz@bayernline.de>
+	* mainwindow.*: Handler for SIGINT added to handle unsaved or
+	changed files more carefully at program termination. Handler for
+	SIGUSR1 added to provide support for LADISH level 1.
+
+
++++ Release 0.3.0 (2009-09-20) +++
+
+2009-09-20 Guido Scholz <guido.scholz@bayernline.de>
+	* main.cpp: Reordered help messages to be less confusing
+	* mainwindow.cpp: Show warning instead of question if file was
+	not saved.
+	* logwidget.*: Fixed setting of text color after line limit is
+	reached.
+
+2009-09-18 Frank Kober <goemusic@yahoo.fr>
+	* mainwindow.cpp, mapwidget.cpp: fixed cloning of IndexOutMode
+
+2009-09-17 Frank Kober <goemusic@yahoo.fr>
+	* main.cpp: fixed start options, extended --help message
+
+2009-09-16 Frank Kober <goemusic@yahoo.fr>
+	* mainwindow.cpp, mapwidget.cpp: two more fixes for reverse offset
+	mode with new channel numbering: load and clone
+	
+2009-09-15 Guido Scholz <guido.scholz@bayernline.de>
+	* logwidget.cpp: Hard coded line limit (1000) for log widget
+	added, fixed text color change bug
+
+2009-09-15 Frank Kober <goemusic@yahoo.fr>
+	* mapwidget.cpp: fixed bug affecting output channel in reverse offset
+	mode, fixed reference value for subtraction, range of out channel 
+	boxes is 2...17 in this case
+	
+2009-09-14 Guido Scholz <guido.scholz@bayernline.de>
+	* TODO: File to remember about what is still to do (or should
+	be done) added
+	* mainwindow.*: Do not ask twice about overwriting an existing
+	file, files without map data made savable. Old style query message
+	box changed to new style.
+	* mainwindow.cpp: Changed view menu items sequence to match
+	visual layout
+
+2009-09-13 Guido Scholz <guido.scholz@bayernline.de>
+	* mainwindow.cpp, mapdata.*: Deliver ALSA client id by delegation
+	* man/qmidiroute.1: Some additional information added
+	* man/de/: German manual page added
+
+2009-09-13 Frank Kober <goemusic@yahoo.fr>
+	* man/fr/qmidiroute.1: french man page translation added
+	* NEWS: updated
+
+2009-09-12 Frank Kober <goemusic@yahoo.fr>
+	* man/qmidiroute.1: man page added
+	* qmidiroute_fr.ts: tooltips translated
+
+2009-09-12 Guido Scholz <guido.scholz@bayernline.de>
+	* mainwindow.*: Icons joined in one toolbar
+	* mainwindow.cpp, logwidget.cpp: tooltip texts added
+	* pixmaps/filesaveas.xpm: More decent labeling
+	* mainwindow.*: Menu/action naming harmonized
+	* mainwindow.cpp, mapdata.*: Fixed memory leaks caused by map
+	data and map widget handling
+	* pixmaps/*.xpm: Changed icon colors to a more coherent set
+
+2009-09-11 Frank Kober <goemusic@yahoo.fr>
+	* mainwindow.*: file actions added to new file toolbar, File menu
+	icons added, clone map icon improved, logwidget visible by default 
+	(suggestion)
+	* logwidget.cpp: report MIDI Channels starting at 1
+	* mainwindow.cpp: fixed map action activation behaviour, adapted to 
+	one tab less in tabwidget
+
+2009-09-11 Guido Scholz <guido.scholz@bayernline.de>
+	* main.cpp: Dependency for stdio.h removed.
+	* mainwindow.*: About message text stored as "static const
+	char".
+	* passwidget.cpp, translations/*.ts: Spacer for port number
+	spin box fixed. German translations improved.
+	* passwidget.*, midimap.*, seqdriver.*: Included header files
+	cleaned up
+	* midimap.cpp: Obsolete memcpy() removed. Improved MIDI map list
+	handling.
+	* configure.ac: Make checks C++ compatible
+	* mainwindow.cpp, seqdriver.*: Display ALSA client id in window
+	title to make client sessions identificable
+	* midimap.cpp, seqdriver.cpp: Fixed error preventing event routing
+	with fixed output channel.
+	* mapwidget.cpp: Set log window font size according to
+	application settings 
+	* logwidget.cpp: Show number of event type when it is unknown
+	* mainwindow.cpp: Event log moved to dockable window, menu item
+	to control visibility of toolbar added, show version in about
+	dialog
+
+2009-09-10 Guido Scholz <guido.scholz@bayernline.de>
+	* pixmaps/file*.xpm: Pixmaps for file new/open/save added.
+
+2009-09-09 Frank Kober <goemusic@yahoo.fr>
+	* mapwidget.cpp: Changed "Note" label to "Value" in case of Type 
+	"Program Change"
+	* qmidiroute_fr.ts: fixed a typo.
+
+2009-09-09 Guido Scholz <guido.scholz@bayernline.de>
+	* passwidget.cpp: Obsolete layout removed, spacing and margin
+	set to standard values.
+	* mainwindow.cpp, seqdriver.*: Fixed monitoring of settings
+	changes for unmatched MIDI events.
+	* mapwidget.*: Obsolete header file includes removed, obsolete
+	string list removed, widget placement by grid layout, fixed
+	missing "Note" label if output type is switched between
+	"Pitchbend" and "Program Change".
+	* mainwindow.*: Disable/enable map menu items according to
+	selected tab type.
+	* mainwindow.*, mapdata.*, mapwidget.*, translations/*.ts: Menu
+	item "File/New" added.
+
+2009-09-08 Guido Scholz <guido.scholz@bayernline.de>
+	* mapwidget.cpp: Stretcher added to keep map edit widgets
+	slim.
+
+2009-09-07 Guido Scholz <guido.scholz@bayernline.de>
+	* main.cpp: Command line option for version information added.
+	Expand name of file given via command line; report error if not
+	found.
+	* main.h, mainwindow.cpp: Definition of global constants rearranged.
+	* translations/qmidiroute_de.ts: German translation updated
+
+2009-09-06 Guido Scholz <guido.scholz@bayernline.de>
+	* mapwidget.cpp, translations/qmidiroute_de.ts: Keyboard shortcuts
+	added.
+	* mainwindow.cpp: Slot functions renamed according to menu name.
+	* main.cpp, mainwindow.*, mapdata.*, mapwidget.*, midimap.*,
+	seqdriver.*: File New/Save/Save as/Quit logic rewritten monitoring
+	also file content changes, file save function re-designed to more
+	OOP style
+	* configure.ac, mainwindow.cpp, seqdriver.cpp: Added define to
+	distinguish between application name and binary name. ALSA port
+	naming cleaned up.
+	* seqdriver.cpp: More descriptive ALSA error messages.
+
+2009-09-03 Frank Kober <goemusic@yahoo.fr>
+	* mainwindow.cpp: new Map pulldown menu, keyboard shortcuts added
+	* qmidiroute_*.ts: translations updated, obsoletes left atm
+
+2009-08-30 Guido Scholz <guido.scholz@bayernline.de>
+	* main.cpp: load file via command line without -f option.
+	* mainwindow.cpp: fixed menu translation context
+	* mainwindow.*: Improved handling of Help/About dialog, fixed
+	stack flooding string handling
+
+2009-08-29 Frank Kober <goemusic@yahoo.fr>
+	* gui.*: removed
+	* mainwindow.cpp, mainwindow.h: created, containing MainWindow
+	class, all Gui elements moved to MainWindow
+
+2009-08-25 Frank Kober <goemusic@yahoo.fr>
+	* gui.cpp, main.h: automatic filename extension added
+	* gui.*, main.cpp: save and save As support added
+	* gui.cpp: qt4 port error in removeArp(int index) hopefully fixed 
+	(affecting load() when one of the three settings tabs was active)
+	* gui.cpp, main.cpp: buttonBox toolbar gets attached to top widget
+
+2009-08-24 Frank Kober <goemusic@yahoo.fr>
+	* mapwidget.cpp: Layout corrected, code cleanup, set nicer default 
+	values when adding a new map
+	* mapwidget.cpp, passwidget.cpp, gui.cpp, seqdriver.cpp: MIDI channel 
+	and port number count starting at 1 except for MIDI Ch Offset mode, 
+	MIDI out channel range adapted to MIDI Out channel mode
+	* mapwidget.cpp: highlighted() replaced by activated() for comboboxes
+	* mapwidget.cpp, passwidget.cpp : setKeyboardTracking to false
+	* logwidget.*: Cleanups
+	* package: Translation support started, some cleanups in analogy to 
+	qmidiarp
+	* package: Application icon added
+
+2009-08-04 Guido Scholz <guido.scholz@bayernline.de>
+	* configure.ac, examples/*: Example file made distributable.
+	* gui.cpp, logwidget.cpp: Improved and simpler layout.
+
+2009-08-03 Guido Scholz <guido.scholz@bayernline.de>
+	* gui.cpp, logwidget.cpp, passwidget: Keyboard shortcuts added.
+	* configure.ac: Obsolete checks removed.
+	* passwidget.cpp: Layout Improved.
+
+2009-07-12 Frank Kober <goemusic@yahoo.fr>
+	* seqdriver.cpp: changed ALSA port names to include port number
+	* package: added autotools build environment, configure,
+	make && make install should work properly now.
+	* logwidget.cpp: MIDI Log is now color coded. Added logging of
+	MIDI START/STOP/CLOCK, and MIDI Clock event logging can be
+	disabled by a brandnew button 
+
+2009-06-25 Frank Kober <goemusic@yahoo.fr>
+	* gui.cpp: addMap and renameMap do now respect 'cancel' in name dialog
+	* package: ported to Qt 4

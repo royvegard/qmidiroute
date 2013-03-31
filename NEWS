@@ -1,0 +1,44 @@
+qmidiroute-0.3.1 (2010-xx-xx)
+
+Fixed Bugs
+  o ... 
+
+New Features
+  o Handler for SIGINT added to handle unsaved or changed files more
+    carefully at program termination.
+  o Handler for SIGUSR1 added to provide support for LADISH level 1.
+
+
+General Changes
+  o ...
+
+
+
+qmidiroute-0.3.0 (2009-09-20)
+
+Fixed Bugs
+  o Missing "Value" label if output type is switched between "Pitchbend" 
+    and "Program Change"
+  o Fixed error preventing MIDI event routing with fixed output channel
+
+New Features
+  o Event log is a dockable/floatable window preserving a history of
+    1000 message lines
+  o Event log is color coded and optionally shows MIDI realtime clock
+    events
+  o Toolbar icons, application menu for MIDI route editing and view
+    options
+  o Application icon
+  o Completely rewritten file new/save/save as/close logic including
+    monitoring for file data changes
+  o French and German translation
+  o Manual pages in English, French and German
+  o ALSA client name uses lower case letters, port names renamed
+  o ALSA client id is shown in window title
+
+
+General Changes
+  o Port form Qt3 to Qt4 library.
+  o Autoconf/automake build
+  o Support for internationalization
+  o MIDI Channel numbering is changed from 0..15 to 1..16

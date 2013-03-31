@@ -1,0 +1,38 @@
+--------------------------------------------------------------------------
+QMidiRoute (C) 2003 by Matthias Nagorni
+Qt4-port 2009 by Frank Kober
+QMidiRoute is released under GNU General Public License (refer to LICENSE file)
+--------------------------------------------------------------------------
+
+QMidiRoute is a MIDI event router and filter. MIDI note, control change,
+program change and pitch bend events are logged, and can be filtered, 
+redirected and transformed into other events according to MIDI maps 
+defined as tabs in the main control surface. 
+To start, click the 'Add MIDI map' button. You can copy midi MAPS into new
+tabs using the 'Clone MIDI map' button. All MIDI maps can be saved in
+a .qma text file.
+QMidiRoute can be started using the following options:
+
+   --portCount <num>         Number of Output Ports [2]
+   --file <filename>         Open Map File <filename>
+
+
+Installation
+-------------
+qmidiroute uses autoconf/automake as build system. For short
+
+  ./configure
+  make
+  make install
+
+does the trick. Please refer to the INSTALL file for more information.
+
+
+CVS check out
+-------------
+If you start with a fresh CVS checkout, please first apply
+
+  autoreconf -i
+
+to get a proper configure script. For more instructions about compiling
+and installing this application please refer to the INSTALL file.

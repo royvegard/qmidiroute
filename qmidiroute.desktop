@@ -1,0 +1,19 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Categories=AudioVideo;X-Sound;Midi;Audio;AudioVideoEditing;X-Midi;
+Name=QMidiRoute
+Name[de]=QMidiRoute
+Name[fr]=QMidiRoute
+GenericName=MIDI Router and Processor for ALSA
+GenericName[de]=MIDI Router und Prozessor für ALSA
+GenericName[fr]=Routeur et Processeur pour ALSA
+Comment=MIDI Router and Processor for ALSA
+Comment[de]=MIDI Router und Prozessor für ALSA
+Comment[fr]=Routeur et Processeur pour ALSA
+Icon=qmidiroute
+MimeType=application/qmr
+Exec=qmidiroute
+TryExec=qmidiroute
+Terminal=false
+StartupNotify=true

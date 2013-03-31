@@ -1,0 +1,141 @@
+.\" 
+.\" Manual page for qmidiroute
+.\" Process with:
+.\"   groff -man -Tascii qmidiroute.1 | less
+.\"
+.\" Get a printable version with:
+.\"   groff -t -e -mandoc -Tps qmidiroute.1 > qmidiroute.ps
+.\"
+.TH QMIDIROUTE 1 2009-09-13
+.SH NAME
+qmidiroute \- MIDI-Signalverarbeiter und -Router
+.SH SYNTAX
+.br
+.B qmidiroute 
+[\fIOption\fR] [\fIDatei\fR]
+.br 
+.B qmidiroute 
+{
+.B \-\-help 
+| 
+.B \-\-version
+}
+.SH BESCHREIBUNG
+.B qmidiroute
+ist ein vielseitiger MIDI-Signalverarbeiter und -Router für den ALSA
+Sequencer.  Die grafische Oberfläche basiert auf der Qt4 Bibliothek.
+.B qmidiroute
+erlaubt die Konfiguration einer beliebigen Anzahl von MIDI-Routen, in
+denen eingehende Signale ausgewählt, modifiziert oder vom Typ her
+verändert werden können, bevor sie einem bestimmten ALSA-Ausgang
+zugeleitet werden. Die Routen arbeiten parallel und sind grafisch in
+Reitern organisiert. Mit 
+.B qmidiroute
+ist es zum Beispiel möglich, den Bereich einer Klaviatur zu verschieben
+oder zu invertieren, sowie Tastendrücke in Befehle zur Programmänderung
+oder Kontrollbefehle in Notensignale umzuwandeln.
+
+Eingehende MIDI-Signale können in einer Liste protokolliert und
+nach Typ farblich unterschiedlich dargestellt werden.
+.B qmidiroute
+bietet einen ALSA-Eingang und als Voreinstellung zwei ALSA-Ausgänge. Die
+ALSA-Client-Identifikationsnummer wird als Teil des Fenstertitels
+dargestellt.
+.SS "Allgemeine Anwendung"
+Nach dem Start der Anwendung wird der Reiter 
+.I Unpassend
+angezeigt (Näheres siehe unten). Zum Erstellen einer MIDI-Route legt man
+über das Menü eine neue Route an, die schließlich als neuer Reiter
+mit allen verfügbaren Einstellungen angezeigt wird. 
+Die komplette Konfiguration kann in einer QMidiRoute-Datei (.qmr)
+gespeichert und von dieser auch wieder geladen werden. Es lassen sich
+mehrere Routen erzeugen, die parallel arbeiten. Die Routen können duch
+Duplizieren, Umbenennen und Löschen verwaltet werden. 
+
+Das 
+.I Protokoll 
+wird zu Beginn am unteren Ende des Programmfensters angezeigt und kann
+verborgen oder als separates Fenster frei beweglich auf der
+Arbeitsfläche platziert werden. Das Aufzeichnen der MIDI-Signale kann
+generell abgeschaltet oder auch selektiv für Signale der MIDI-Echtzeituhr
+eingeschaltet werden. 
+.SS "MIDI Eingang"
+Der Eingabebereich 
+.I Eingang
+repräsentiert den Filter für die eingehenden MIDI-Signale der
+betreffenden Route.  Hier lassen sich die zubehandelnden Signaltypen 
+.I Note, Controller, Pitchbend
+und 
+.I Program Change
+auswählen.  Das Signal läßt sich nach den enthaltenen Daten bzw. nach
+dem MIDI-Kanal filtern. Die zu den hier im 
+.I Eingang
+festgelegten Kriterien passenden Signale werden zum Bereich
+.I Ausgang
+weitergeleitet.
+.SS "MIDI Ausgang"
+Der Eingabebereich 
+.I Ausgang
+legt die Parameter fest, mit denen die vom Eingang kommenden Signale
+transformiert werden; z.B. wie der Kanal und andere Werte modifiziert
+und zu welchem ALSA-Ausgang diese geleitet werden. 
+.I Kanäle
+und 
+.I Werte
+können, je nach eingehendem Signal, auf
+.I Versatz
+oder
+.I Umgekehrter Versatz
+konfiguriert werden. Zum Beispiel führt die Auswahl von 
+.I Umgekehrter Versatz
+dazu, dass der eingehende Wert von dem hier festgelegte Wert abgezogen
+wird.  Wenn der Wertebereich eines ausgehenden Parameters
+unterschiedlich vom Bereich des entsprechenden Eingangsparameters ist,
+wird der Wert entsprechend skaliert. Die modifizierten MIDI-Signale werden
+an den hier
+festgelegten ALSA-Ausgang geleitet. Die Anzahl der zur Verfüngung
+stehenden ALSA-Ausgänge kann über die entsprechende Kommandozeilenoption
+festgelegt werden.
+.SS "Unpassende MIDI-Signale"
+In dem mit 
+.I Unpassend
+bezeichneten Reiter wird die Behandlung der MIDI-Signale festgelegt, die
+keinem Filterkriterium genügen. Die Signale können verworfen oder an
+einen konfigurierten ALSA-Ausgang geleitet werden.
+.SH OPTIONEN
+.TP
+.BI \-\-portCount\  <Anzahl>
+Setz die Anzahl der verfügbaren ALSA-Ausgänge auf den Wert <Anzahl>. Der
+voreingestellte Wert beträgt 2.
+.TP
+.BI \-\-help
+Gibt die verfügbaren Kommandozeilenoptionen aus und beendet das
+Programm.
+.TP
+.BI \-\-version
+Gibt die Programmversion aus und beendet das Programm.
+.TP
+.B Datei
+Name einer QMidiRoute-Datei (.qmr) zum Öffnen beim Start des Programms.
+.SH DATEIEN
+.I *.qmr
+.RS
+QMidiRoute-Dateien, enthalten Daten der konfigurieten MIDI-Routen in
+einem reinen Textformat.
+.SH BEISPIELE
+Eine Beispieldatei kann in einem der folgenden Verzeichnisse gefunden
+werden:
+.I /usr/share/qmidiroute 
+oder
+.I /usr/local/share/qmidiroute
+.SH BEMERKUNGEN
+Fehler und Warnungen werden nach 
+.BR stderr (3)
+geschrieben.
+.SH UNTERSTÜTZUNG
+alsamodular-devel@lists.sourceforge.net
+.SH AUTOREN
+Matthias Nagorni, Frank Kober and Guido Scholz. Das Original dieser
+Handbuchseite wurde von Frank Kober <emuse@users.sourceforge.net>
+geschrieben; die deutsche Übersetzung wurde von Guido Scholz
+<gscholz@users.sourceforge.net> angefertigt.
